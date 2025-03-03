@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Use your app's layout
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-5">Handwriting Recognition</h1>
+        <p class="lead">Upload an image to analyze handwritten text.</p>
+        <p class="lead">For test purpose</p>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center" style="padding-top: 10px; padding-bottom: 10px;">
+        <div class="card shadow p-4" style="width: 400px;">
+            <h2 class="h4 mb-3 text-center">Upload your image here!</h2>
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="file" class="form-label">Choose an image:</label>
+                    <input type="file" name="file" id="file" accept="image/*" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-primary w-100" style="height: 45px;">Analyze Handwriting</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    @if (ViewData["UploadedImageUrl"] != null)
+    {
+        <div class="card mt-4">
+            <div class="card-body text-center">
+                <h3 class="h5">Uploaded Image:</h3>
+                <img src="@ViewData["UploadedImageUrl"]" alt="Uploaded Image" class="img-fluid mt-3" style="max-width: 100%; height: auto;" />
+            </div>
+        </div>
+    }
+
+    @if (ViewData["Result"] != null)
+    {
+        <div class="alert alert-success mt-4" role="alert">
+            <h3 class="alert-heading">Recognized Text:</h3>
+            <pre>@ViewData["Result"]</pre>
+        </div>
+    }
+    @if (ViewData["Error"] != null)
+    {
+        <div class="alert alert-danger mt-4" role="alert">
+            @ViewData["Error"]
+        </div>
+    }
+
+    <hr class="my-5">
+
+    <div class="text-center">
+        <a href="@Url.Action("History", "Handwriting")" class="btn btn-secondary">
+            View Upload History
+        </a>
+    </div>
+</div>
